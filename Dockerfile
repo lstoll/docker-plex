@@ -2,7 +2,7 @@ FROM ubuntu:xenial
 
 ENV PLEX_INSTALL_URL=https://downloads.plex.tv/plex-media-server/1.2.2.2857-d34b464/plexmediaserver_1.2.2.2857-d34b464_amd64.deb
 
-RUN apt-get update && apt-get install -y curl
+RUN apt-get update && apt-get install -y curl sudo
 
 # the number of plugins that can run at the same time
 ENV PLEX_MEDIA_SERVER_MAX_PLUGIN_PROCS=6

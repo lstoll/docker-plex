@@ -23,11 +23,10 @@ if [ -f /etc/default/locale ]; then
 fi
 
 export PLEX_MEDIA_SERVER_HOME=/usr/lib/plexmediaserver
-export LD_LIBRARY_PATH="${PLEX_MEDIA_SERVER_HOME}"
 export TMPDIR="${PLEX_MEDIA_SERVER_TMPDIR}"
 
 echo $PLEX_MEDIA_SERVER_MAX_PLUGIN_PROCS $PLEX_MEDIA_SERVER_MAX_STACK_SIZE $PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR
 
 ulimit -s $PLEX_MEDIA_SERVER_MAX_STACK_SIZE
 
-(cd /usr/lib/plexmediaserver; ./Plex\ Media\ Server)
+(cd /usr/lib/plexmediaserver; sudo -E -u plex sh -c 'LD_LIBRARY_PATH="$PLEX_MEDIA_SERVER_HOME" ./Plex\ Media\ Server')
