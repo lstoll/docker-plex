@@ -14,13 +14,14 @@ ENV PLEX_MEDIA_SERVER_MAX_STACK_SIZE=3000
 ENV PLEX_MEDIA_SERVER_TMPDIR=/transcode
 
 # uncomment to set it to something else
-ENV PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR="/config"
+ENV PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR=/config
 
 # the username that PMS should run as. Definitely do not want to change this
 ENV PLEX_MEDIA_SERVER_USER=plex
 
-# The UID to map the plex user to. You *do* want this, for host file perms
+# The UID/GID to map the plex user to. You *do* want this, for host file perms
 ENV PLEX_MEDIA_SERVER_USER_UID="-1"
+ENV PLEX_MEDIA_SERVER_USER_GID="-1"
 
 RUN curl -Lo /tmp/init.deb https://github.com/Yelp/dumb-init/releases/download/v1.2.0/dumb-init_1.2.0_amd64.deb && \
 	dpkg -i /tmp/init.deb && \
@@ -33,7 +34,7 @@ RUN curl -o /tmp/plex.deb $PLEX_INSTALL_URL && \
 ADD run.sh /
 RUN chmod +x /run.sh
 
-RUN mkdir -p "$PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR"
+RUN mkdir -p "$PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR" && mkdir -p "$PLEX_MEDIA_SERVER_TMPDIR" && mkdir -p /media
 
 EXPOSE 32400
 VOLUME ["/config" "/media" "/transcode"]
