@@ -2,7 +2,7 @@ FROM ubuntu:xenial
 
 ENV PLEX_INSTALL_URL=https://downloads.plex.tv/plex-media-server/1.2.2.2857-d34b464/plexmediaserver_1.2.2.2857-d34b464_amd64.deb
 
-RUN apt-get update && apt-get install -y curl sudo
+RUN apt-get update && apt-get install -y curl sudo xtail
 
 # the number of plugins that can run at the same time
 ENV PLEX_MEDIA_SERVER_MAX_PLUGIN_PROCS=6
@@ -41,5 +41,4 @@ VOLUME ["/config" "/media" "/transcode"]
 
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 
-CMD ["sh", "-c", "(/run.sh &) && sleep 1 && tail -f \"$PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR/Plex Media Server/Logs/\"*" ]
-# CMD ["sh", "-c", "/run.sh" ]
+CMD ["sh", "-c", "/run.sh" ]
