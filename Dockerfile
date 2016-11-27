@@ -1,6 +1,6 @@
 FROM ubuntu:xenial
 
-ENV PLEX_INSTALL_URL=https://downloads.plex.tv/plex-media-server/1.2.2.2857-d34b464/plexmediaserver_1.2.2.2857-d34b464_amd64.deb
+ENV PLEX_INSTALL_URL=https://downloads.plex.tv/plex-media-server/1.2.7.2987-1bef33a/plexmediaserver_1.2.7.2987-1bef33a_amd64.deb
 
 RUN apt-get update && apt-get install -y curl sudo xtail
 
